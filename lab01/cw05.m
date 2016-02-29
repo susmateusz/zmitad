@@ -4,16 +4,16 @@
  PL = DATA(:,3);
  PW = DATA(:,4);
  subplot(221);
- hist(SL);
+ hist(SL,sqrt(length(SL)));
  title('SL');
  subplot(222);
- hist(SW);
+ hist(SW,sqrt(length(SW)));
  title('SW');
  subplot(223);
- hist(PL);
+ hist(PL,sqrt(length(PL)));
  title('PL');
  subplot(224);
- hist(PW);
+ hist(PW,sqrt(length(PW)));
  title('PW');
  
  print -depsc cw05.eps
