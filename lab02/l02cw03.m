@@ -19,13 +19,9 @@ disp('funkcja ttest');
 disp('funkcja tcdf');
 xbar = mean(x);  % Sample mean
 s = std(x);      % Sample standard deviation
-t = (xbar - m)/(s/sqrt(n));
-p = 1-tcdf(t,n-1)
-
+t = (xbar - u)/(s/sqrt(n));
+p = tcdf(t,n-1)
+2*p
 
 %% Wnioski
-% ttest:
-% h=1 - hipoteze h0 odrzucono
-% pval=3.12e-04
-% tcdf:
-% p=0.83 - wartosc wieksza od a, czyli duze prawdopodobienstwo
+% dla obu testów wartość statystki jest taka sama
