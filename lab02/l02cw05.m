@@ -12,7 +12,7 @@ x2=normrnd(m2,s2,n2,1);
 [h, pval, ci, stats]=vartest2(x1,x2)
 
 %% Wyniki
-%h = 0
+%h = 0 - nie ma podstaw do odrzucenia hipotezy
 %pval =  0.086460
 %ci =   0.18477   1.10220
 %    fstat =  0.45128
