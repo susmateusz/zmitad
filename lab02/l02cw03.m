@@ -13,6 +13,12 @@ n = 18;
 a = 0.01;
 %% generowanie proby - normrnd( srednia, odchylenie std, rows, cols)
 x = normrnd(m, s, n, 1);
+% hipoteza
+% h0: u=49 - ceny gruntu wzrosly przecietnie o 49%
+% h1: u!=49 - przecietny wzrost cen gruntu jest różny od 49%
+% a=0.01 - poziom istotnosci
+% testowanie dwustronne
+
 %% testowanie hipotezy
 disp('funkcja ttest');
 [h, pval, ci, stats] = ttest(x,u,'alpha',0.01)
