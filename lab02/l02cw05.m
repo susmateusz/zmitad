@@ -10,3 +10,13 @@ x1=normrnd(m1,s1,n1,1);
 x2=normrnd(m2,s2,n2,1);
 
 [h, pval, ci, stats]=vartest2(x1,x2)
+
+%% Wyniki
+%h = 0
+%pval =  0.086460
+%ci =   0.18477   1.10220
+%    fstat =  0.45128
+%    df1 =  19
+%    df2 =  21
+
+
