@@ -1,0 +1,1 @@
+for i in {02..13}; do printf '#!/usr/bin/env octave\n'"function l03e$i\npkg load statistics;\npkg load nan;\nf = figure($i);\ndisp(\"Lista 3. Ćwiczenie $i.\");\n\nwaitfor(f);" > l03e$i.m && chmod u+x l03e$i.m && ./l03e$i.m; done

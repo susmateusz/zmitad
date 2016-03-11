@@ -1,0 +1,7 @@
+
+
+with open("iris.txt") as f:
+    lines = f.readlines()
+    for line in lines:
+    	elems = line.split(' ')
+	print elems
