@@ -1,9 +1,9 @@
-#!/usr/bin/env octave
+%#!/usr/bin/env octave
 function l03e02
-pkg load statistics;
-pkg load nan;
+%pkg load statistics;
+%pkg load nan;
 f = figure(02);
-disp("Lista 3. Ćwiczenie 02.");
+disp('Lista 3. Ćwiczenie 02.');
 % Przygotuj wykres dystrybuanty dla zbioru danych controlB z logarytmiczną skalą
 % osi X.
 % zbiór danych
