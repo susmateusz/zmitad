@@ -27,39 +27,27 @@ h_women = cdfplot(body_women); hold on;
 h_women_t = cdfplot(women_t);
 grid on; grid minor;
 legend('men - empiryczny','men - teoretyczny','women - empiryczny','women - teoretyczny','location','northwest');
-%% testowanie normalności rozkładów
+%% testowanie
 % h0: rozklad all jest normalny
 % h1: rozklad all nie jest normalny
 % output: H = 1, P = 0.0312727, KSSTAT = 0.0636941, CV = 0.0599766
-% wniosek: hipoteza h0 została odrzucona, rozkład nie jest normalny
+%
 rozklad = all;
 CDFall = normcdf(rozklad,mean(rozklad),std(rozklad,1));
 [H,P,KSSTAT,CV] = kstest(rozklad,[rozklad,CDFall],alfa);
 disp('all:');
 disp(sprintf('H = %g, P = %g, KSSTAT = %g, CV = %g',H,P,KSSTAT,CV));
-% h0: rozklad body_men jest normalny
-% h1: rozklad body_men nie jest normalny
-% output: H = 0, P = 0.369189, KSSTAT = 0.0577061, CV = 0.0857101
-% wniosek: ksstat > cv nie jest spełnione, a p>alfa, wiec można potwierdzić
-% h0
+
 rozklad = body_men;
 CDFall = normcdf(rozklad,mean(rozklad),std(rozklad,1));
 [H,P,KSSTAT,CV] = kstest(rozklad,[rozklad,CDFall],alfa);
 disp('body_men:');
 disp(sprintf('H = %g, P = %g, KSSTAT = %g, CV = %g',H,P,KSSTAT,CV));
-% h0: rozklad body_women jest normalny
-% h1: rozklad body_women nie jest normalny
-% output: H = 1, P = 0.0214595, KSSTAT = 0.0926953, CV = 0.0835579
-% wniosek: hipoteza h0 została odrzucona, rozkład nie jest normalny
 rozklad = body_women;
 CDFall = normcdf(rozklad,mean(rozklad),std(rozklad,1));
 [H,P,KSSTAT,CV] = kstest(rozklad,[rozklad,CDFall],alfa);
 disp('body_women:');
 disp(sprintf('H = %g, P = %g, KSSTAT = %g, CV = %g',H,P,KSSTAT,CV));
-%% testowanie, czy rozkłady men i women są z tej samej dystrybucji
-[H,P,KSSTAT] = kstest2(body_men, body_women);
-disp('kstest2(men, women):');
-disp(sprintf('H = %g, P = %g, KSSTAT = %g',H,P,KSSTAT));
 %% wyglądy wykresu
 set(h_all,'Color','b');
 set(h_all,'linewidth',1);
