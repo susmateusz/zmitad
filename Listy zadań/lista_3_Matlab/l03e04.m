@@ -1,7 +1,4 @@
-%#!/usr/bin/env octave
-function l03e04
-%pkg load statistics;
-%pkg load nan;
+clear; close;
 f = figure(04);
 disp('Lista 3. Ćwiczenie 04.');
 % W analogiczny sposób przeprowadź rozumowanie dla grupy kontrolnej A oraz grupy
@@ -23,4 +20,3 @@ set(h_controlA,'Color','b');
 set(h_controlA,'linewidth',1);
 set(h_treatmentA,'Color','r');
 set(h_treatmentA,'linewidth',1);
-waitfor(f);

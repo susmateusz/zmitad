@@ -1,3 +1,4 @@
+close; clear;
 disp('Lista 3. Ćwiczenie 11.');
 %% wczytywanie danych
 alfa = 0.05;

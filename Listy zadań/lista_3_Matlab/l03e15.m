@@ -28,7 +28,7 @@ fprintf('H = %g, P = %g, LSTAT = %g, CV = %g\n',H,P,LSTAT,CV);
 % output: H = 0, P = 0.5, LSTAT = 0.147622, CV = 0.2515
 % wniosek: hipoteza o normalności rozkładu nie została odrzucona
 
-[H,P,LSTAT,CV] = lillietest(xi);
+[H,P,LSTAT,CV] = lillietest(yi);
 fprintf('LILLIETEST dla placebo:\n');
 fprintf('H = %g, P = %g, LSTAT = %g, CV = %g\n',H,P,LSTAT,CV);
 % output: H = 0, P = 0.5, LSTAT = 0.147622, CV = 0.2515
@@ -57,3 +57,9 @@ fprintf('TTEST dla leku:\n');
 fprintf('H = %g, P = %g\n',H,P);
 % output: H = 0, P = 1
 % wniosek: hipoteza o normalności rozkładu nie została odrzucona
+%% wnioski:
+% Dla wszystkich prób prócz kstestu dla leku hipotezy h0 nie zostały
+% odrzucone. p-value znacząco się różniły. Skala logarytmiczna
+% prawdopodobnie nie ma wpływu negatywnego na wyniki badań, w przypadku
+% logarytmicznego charakteru badanego zjawiska pozwala ona na wykonywanie
+% badań przy mniejszej i bardziej miarodajnej wariancji.

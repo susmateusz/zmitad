@@ -1,6 +1,4 @@
-%pkg load statistics;
-%pkg load nan;
-%f = figure(08);
+close; clear;
 disp('Lista 3. Ćwiczenie 08.');
 %% dane
 alfa = 0.05;

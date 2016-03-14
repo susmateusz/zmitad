@@ -1,7 +1,4 @@
-%#!/usr/bin/env octave
-function l03e03
-%pkg load statistics;
-%pkg load nan;
+clear; close;
 f = figure(03);
 disp('Lista 3. Ćwiczenie 03.');
 % Przygotuj wykres dystrybuanty dla zbioru danych controlB z logarytmiczną skalą
@@ -20,4 +17,3 @@ set(h_controlB,'Color','b');
 set(h_controlB,'linewidth',1);
 set(h_treatmentB,'Color','r');
 set(h_treatmentB,'linewidth',1);
-waitfor(f);

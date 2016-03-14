@@ -1,6 +1,4 @@
-%pkg load statistics;
-%pkg load nan;
-%f = figure(06);
+clear; close;
 %% wczytywanie danych
 disp('Lista 3. Ćwiczenie 06.');
 fd = fopen('../Dane/pacjenci.csv');
@@ -24,4 +22,4 @@ end
 [H,P,KSSTAT] = kstest2(height_men, height_women);
 disp(sprintf('H = %g, P = %g, KSSTAT = %g',H,P,KSSTAT));
 % H = 0, P = 0.997877, KSSTAT = 0.147436
-% hipoteza h0 została przyjęta
+% hipoteza h0 nie została odrzucona

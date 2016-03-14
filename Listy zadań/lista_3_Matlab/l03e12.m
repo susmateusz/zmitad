@@ -1,5 +1,4 @@
-%pkg load statistics;
-%pkg load nan;
+close; clear;
 disp('Lista 3. Ćwiczenie 12.');
 %% wczytywanie danych
 alfa = 0.1;
