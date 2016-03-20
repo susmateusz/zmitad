@@ -9,15 +9,16 @@ spokojni = [ 4, 6, 7, 9, 9];
 % sprawdzenie, czy mo¿na za³o¿yæ równoœæ wariancji:
 % h_var0: próby maj¹ równe wariancje
 % h_var1: próby maj¹ ró¿ne wariancje
-h = vartest2(nerwowi, spokojni);
+h = vartest2(nerwowi, spokojni)
 % output: h=0, nie ma podstaw do odrzucenia hipotezy o równych wariancjach
 
 alfa = 0.05;
 [h,p,c,s] = ttest2(nerwowi, spokojni, 'Tail', 'right' ,'Alpha', alfa);
-fprintf('T-TEST :\n');
+fprintf('T-TEST:\n');
 fprintf('H = %g, P = %g, C = %s, tstat = %g, df = %g, sd = %g\n\n',h,p,mat2str(c),s.tstat,s.df,s.sd);
 % output: H = 0, P = 0.989431, C = [-4.95031043535985 Inf], tstat = -2.86039, df = 8, sd = 1.65831
 % wniosek: 
+% * wariancje nie sa znaczaco rozne, mozna zastosowac ttest
 % * nie ma podstaw do odrzucenia h0, nie stwierdzono, ¿eby ludzie
 % nerwowi wykonywali wiêcej gestów
 % * P~=0.98>>alfa - prawdopodobinstwo bledu 2. rodzaju jest bardzo niskie
