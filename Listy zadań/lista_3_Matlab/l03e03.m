@@ -1,6 +1,6 @@
 clear; close;
 f = figure(03);
-disp('Lista 3. Ćwiczenie 03.');
+disp('Lista 3. Cwiczenie 03.');
 % Przygotuj wykres dystrybuanty dla zbioru danych controlB z logarytmiczną skalą
 % osi oraz dystrybuanty dla zbioru danych treatmentB z logarytmiczną skalą osi X
 % (przerywaną linią) - na jednym wykresie.

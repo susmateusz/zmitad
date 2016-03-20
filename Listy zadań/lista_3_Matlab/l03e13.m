@@ -11,7 +11,13 @@ fclose(fd);
 % h0: rozkład jest normalny
 % h1: rozkład nie jest normalny
 [H, pValue, W] = swtest(kondensatory, alfa);
-disp('kondensatory:');
+disp('kondensatory - SW:');
 fprintf('H = %g, pValue = %g, W = %g\n\n',H,pValue,W);
 % output: H = 0, pValue = 0.145563, W = 0.959802
 % wniosek: kondensatory - pojemność ma rozklad normalny
+
+[H, pValue] = lillietest(kondensatory, alfa);
+disp('kondensatory - Lillieforsa:');
+fprintf('H = %g, pValue = %g\n\n',H,pValue);
+% output: H = 0, pValue = 0.261224
+% wniosek: rozklad normalny

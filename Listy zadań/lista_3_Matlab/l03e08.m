@@ -10,14 +10,14 @@ renety=[16.5, 1, 22.6, 25.3, 23.7, 1, 23.3, 23.9, 16.2, 23.0, 21.6, 10.8, 12.2, 
 [H,P] = ttest(delikates, mean(delikates));
 fprintf('Test TTEST dla delikatesy:\n');
 fprintf('H = %g, P = %g\n',H,P);
-fprintf('WNIOSEK: Rozkład jest normalny.\n\n');
+fprintf('WNIOSEK: Rozklad jest normalny.\n\n');
 
 % h0: renety mają rozkład normalny
 % h1: renety nie mają rozkładu normalnego
 [H,P] = ttest(renety, mean(renety));
 fprintf('Test TTEST dla renet:\n');
 fprintf('H = %g, P = %g\n',H,P);
-fprintf('WNIOSEK: Rozkład jest normalny.\n\n');
+fprintf('WNIOSEK: Rozklad jest normalny.\n\n');
 %% wykresy dystrybuanty
 f = figure(8);
 h1 = cdfplot(delikates);hold on;
@@ -29,9 +29,9 @@ grid on; grid minor;
 [H,P] = ttest2(delikates, renety);
 fprintf('Test TTEST2 dla delikates i renety:\n');
 fprintf('H = %g, P = %g\n',H,P);
-fprintf('WNIOSEK: nie ma podstaw do odrzucenia hipotezy h0, rozkłady mogą być takie same.\n\n');
+fprintf('WNIOSEK: nie ma podstaw do odrzucenia hipotezy h0, rozklady moga byc takie same.\n\n');
 
 [H,P,KSSTAT] = kstest2(delikates, renety);
 fprintf('Test KSTEST2 dla delikates i renet:\n');
 fprintf('H = %g, P = %g, KSSTAT = %g\n',H,P,KSSTAT);
-fprintf('WNIOSEK: Przyjęto h1, P<0.05 więc nie ma ryzyka fałszywego odrzucenia prawdziwe hipotezy h0.\n\n');
+fprintf('WNIOSEK: Przyjeto h1, P<0.05 wiec nie ma ryzyka falszywego odrzucenia prawdziwe hipotezy h0.\n\n');

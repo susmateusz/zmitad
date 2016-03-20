@@ -58,8 +58,8 @@ fprintf('H = %g, P = %g\n',H,P);
 % output: H = 0, P = 1
 % wniosek: hipoteza o normalności rozkładu nie została odrzucona
 %% wnioski:
-% Dla wszystkich prób prócz kstestu dla leku hipotezy h0 nie zostały
-% odrzucone. p-value znacząco się różniły. Skala logarytmiczna
-% prawdopodobnie nie ma wpływu negatywnego na wyniki badań, w przypadku
+% Dla wszystkich pr�bb pr�cz kstestu dla leku hipotezy h0 nie zosta�y
+% odrzucone. p-value znaczao sie roznily. Skala logarytmiczna
+% prawdopodobnie nie ma wplywu negatywnego na wyniki badan, w przypadku
 % logarytmicznego charakteru badanego zjawiska pozwala ona na wykonywanie
-% badań przy mniejszej i bardziej miarodajnej wariancji.
+% badan przy mniejszej i bardziej miarodajnej wariancji.
