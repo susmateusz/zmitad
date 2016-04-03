@@ -4,12 +4,18 @@ fprintf('Lista 4. Cwiczenie 3.');
 mniej30 = [ 6, 7, 10, 9];
 po30 = [ 5, 6, 2, 3];
 %% testowanie
+% testowanie normalnosci rozkladow
+[h,p]=swtest(mniej30)
+[h,p]=swtest(po30)
+% licznosci
+length(mniej30)
+length(po30)
 % h0: osoby <30 i >30 maja taki sam œredni wspolczynnik rozbawienia
 % h1: osoby ponizej 30 maja wyzszy wspolczynnik rozbawienia 
 % sprawdzenie, czy mo¿na za³o¿yæ równoœæ wariancji:
 % h_var0: próby maj¹ równe wariancje
 % h_var1: próby maj¹ ró¿ne wariancje
-h = vartest2(mniej30, po30)
+h_var = vartest2(mniej30, po30)
 % output: h=0, nie ma podstaw do odrzucenia hipotezy o równych wariancjach
 % mozna zastosowac ttest
 
