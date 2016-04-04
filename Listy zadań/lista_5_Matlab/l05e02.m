@@ -16,19 +16,20 @@ signs(isnan(signs))=0;
 stairs(cumsum(signs));
 grid on; grid minor;
 
-subplot(323);
+subplot(334);
 qqplot(przed); grid on; grid minor;
-subplot(324);
+subplot(335);
+qqplot(przed,po); grid on; grid minor;
+subplot(336);
 qqplot(po); grid on; grid minor;
 
 subplot(325);
 boxplot([przed,po]); grid on; grid minor;
 subplot(326);
 boxplot(przed-po); grid on; grid minor;
-%% ttest
-[h,p] = swtest(przed)  % rozk³ad nie jest normalny
-[h,p] = swtest(po)  % rozk³ad nie jest normalny
-[h,p,c,s] = ttest2(przed,po) % nie odrzucono h0, ale za³o¿enia niespe³nione
+%% testowanie, czy probki naleza do tego samego rozkladu
+mwwtest(przed,po);
+% wniosek - tak, zalozenie jest spelnione
 
 %% test znakow
 % h1: \theta != 0, zatrudnienie powoduje zmiany w czytelnictwie

@@ -20,18 +20,21 @@ stairs(cumsum(signs));
 %ylim([-1.5 1.5]);
 grid on; grid minor;
 
-subplot(425);
+subplot(437);
 qqplot(w1); grid on; grid minor;
-subplot(426);
+subplot(438);
+qqplot(w1,w2); grid on; grid minor;
+subplot(439);
 qqplot(w2); grid on; grid minor;
+
 
 subplot(427);
 boxplot([w1',w2']); grid on; grid minor;
 subplot(428);
 boxplot(w1-w2); grid on; grid minor;
-%% ttest
-[h,p] = swtest(w1)  % rozk³ad nie jest normalny
-[h,p] = swtest(w2)  % rozk³ad normalny
+%% testowanie, czy probki naleza do tego samego rozkladu
+mwwtest(w1,w2);
+% wniosek - tak, zalozenie jest spelnione
 
 %% test znaków
 [p,h,stats] = signtest(w1,w2,'tail','right')

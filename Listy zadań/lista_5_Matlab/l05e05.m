@@ -11,17 +11,18 @@ alfa = 0.1;
 %% testy graficzne
 figure(5);
 
-subplot(221);
+subplot(231);
 qqplot(grupa1); grid on; grid minor;
-subplot(222);
+subplot(232);
+qqplot(grupa1,grupa2); grid on; grid minor;
+subplot(233);
 qqplot(grupa2); grid on; grid minor;
 
 subplot(212);
 boxplot(M(:,1),M(:,2)); grid on; grid minor;
-%% ttest
-[h,p] = swtest(grupa1)  % rozk³ad jest normalny
-[h,p] = swtest(grupa2)  % rozk³ad nie jest normalny
-[h,p,c,s] = ttest2(grupa1,grupa2) % nie odrzucono h0, ale za³o¿enia niespe³nione
+%% testowanie, czy probki naleza do tego samego rozkladu
+mwwtest(grupa1,grupa2);
+% wniosek - nie, za³o¿enie nie jest spe³nione
 
 %% test znakow
 [p,h,stats] = ranksum(grupa1,grupa2,'alpha',alfa)
@@ -31,3 +32,5 @@ boxplot(M(:,1),M(:,2)); grid on; grid minor;
 % odrzucono h0, przyjêto h1, mediany czasów æwiczenia w grupach by³y ró¿ne
 median(grupa1)
 median(grupa2)
+% poprawka: za³o¿enia testu nie s¹ spe³nione, próbki pochodz¹ z ró¿nych
+% rozk³adów
