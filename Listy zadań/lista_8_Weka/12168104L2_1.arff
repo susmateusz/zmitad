@@ -1,0 +1,13 @@
+@relation 200379L2_1
+
+@attribute kwota_kredytu real
+@attribute wiek real
+@attribute płeć {M, K}
+@attribute status_decyzji_kredytowej {pozytywny, negatywny}
+
+@data
+684,30,M,pozytywny
+523,35,K,negatywny
+476,36,M,pozytywny
+342,34,K,pozytywny
+475,40,M,negatywny
