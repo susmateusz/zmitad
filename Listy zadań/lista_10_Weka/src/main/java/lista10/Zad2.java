@@ -8,12 +8,11 @@ import weka.core.converters.ConverterUtils.DataSource;
 import weka.filters.Filter;
 import weka.filters.supervised.attribute.Discretize;
 
+import javax.xml.parsers.DocumentBuilder;
 import java.io.File;
 import java.io.IOException;
-import java.util.Collections;
-import java.util.Enumeration;
-import java.util.HashMap;
-import java.util.Map;
+import java.util.*;
+import java.util.stream.Collectors;
 
 
 /**
@@ -21,6 +20,7 @@ import java.util.Map;
  */
 public class Zad2 {
 
+    public static final String SUM = "#SUM";
     static String inputFilename = "/home/mateusz/Studia/sem8/ZMiTAD/Listy zadań/lista_10_Weka/12168104L3_1.arff";
     static String outputFilename = "/home/mateusz/Studia/sem8/ZMiTAD/Listy zadań/lista_10_Weka/12168104L4_2_tmp.arff";
     static double LOG_BASE = 2;
@@ -31,6 +31,7 @@ public class Zad2 {
         // <Atrybut, wartosciTegoAtrybutu,WartosciAtrybutuDecyzyjnego,liczniki>
         Map<String, Map<String, Map<String, Double>>> data = getCountersFromInstances(instances);
         gainRatioAttributeEval(data);
+        getAttributesEnthropies(data);
         saveToArffFile(instances,outputFilename);
     }
 
@@ -84,10 +85,14 @@ public class Zad2 {
         return 0;
     }
 
-    private static void getAttributeEnthropy(Map<String, Map<String, Map<String, Double>>> data) {
+    private static Map<String,Double> getAttributesEnthropies(Map<String, Map<String, Map<String, Double>>> data) {
+        Map<String, Double> attributesEntrophies = new HashMap<>();
         for(String key : data.keySet()){
-
+            List<Double> list = data.get(key).values().stream().map(map->map.get(SUM)).collect(Collectors.toList());
+            double hAttribute = list.stream().map(v->-v*log(v)).mapToDouble(Double::doubleValue).sum();
+            attributesEntrophies.put(key,hAttribute);
         }
+        return attributesEntrophies;
 
     }
 
