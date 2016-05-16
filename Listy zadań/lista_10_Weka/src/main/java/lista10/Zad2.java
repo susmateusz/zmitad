@@ -30,9 +30,38 @@ public class Zad2 {
         instances = discretize(instances);
         // <Atrybut, wartosciTegoAtrybutu,WartosciAtrybutuDecyzyjnego,liczniki>
         Map<String, Map<String, Map<String, Double>>> data = getCountersFromInstances(instances);
+        Map<String, Map<String,Double>> output = new HashMap<>();
+
         gainRatioAttributeEval(data);
-        getAttributesEnthropies(data);
+        Map<String, Double> attributesEnthropies = getAttributesEnthropies(data);
+        for(String key : attributesEnthropies.keySet()){
+            Map<String,Double> enthropies = new HashMap<>();
+            enthropies.put("hAttribute", attributesEnthropies.get(key));
+            output.put(key,enthropies);
+        }
+        Map<String, Double> classEnthropies = getClassEnthropies(data);
+        for(String key : classEnthropies.keySet()){
+            Map<String,Double> enthropies = new HashMap<>();
+            enthropies.put("hClass", classEnthropies.get(key));
+            output.put(key,enthropies);
+        }
+        System.out.println(output);
         saveToArffFile(instances,outputFilename);
+    }
+
+    private static Map<String,Double> getClassEnthropies(Map<String, Map<String, Map<String, Double>>> data) {
+        Map<String, Double> classEntrophies = new HashMap<>();
+        for(String key : data.keySet()){
+            Map<String, Map<String, Double>> attrData = new HashMap<>(data.get(key));
+            // pozbywanie się sumy - zostało {dobry, zły}
+            attrData.values().stream().forEach(map->map.remove(SUM));
+
+            System.out.println(attrData.values());
+            //System.out.println(attrData.values().stream().flatMap(map->map.values().stream()).collect(Collectors.toList()));
+            //double classAttribute = attrData.values().stream().map(v->-v*log(v)).mapToDouble(Double::doubleValue).sum();
+            //classEntrophies.put(key,hAttribute);
+        }
+        return classEntrophies;
     }
 
     private static Map<String, Map<String, Map<String, Double>>> getCountersFromInstances(Instances instances) {
@@ -93,7 +122,6 @@ public class Zad2 {
             attributesEntrophies.put(key,hAttribute);
         }
         return attributesEntrophies;
-
     }
 
     private static double log(double num){
