@@ -1,0 +1,28 @@
+package lista9;
+
+import java.util.Iterator;
+
+import weka.core.Instance;
+import weka.core.Instances;
+import weka.core.converters.ConverterUtils.DataSource;
+
+public class App {
+
+	public static void main(String... args) throws Exception {
+			Instances instances = loadArffFile();
+			for (Instance instance : instances) {
+				System.out.println(instance);
+			}
+			for (int i = 0; i < instances.numInstances(); i++) {
+				String string = instances.[i];
+
+			}
+	}
+
+	private static Instances loadArffFile() throws Exception {
+		DataSource dataSource = new DataSource("/home/mateusz/Studia/sem8/ZMiTAD/Listy zadań/lista_9_Weka/12168104L2_2.arff");
+		Instances instances = dataSource.getDataSet();
+		return instances;
+	}
+
+}

@@ -1,0 +1,22 @@
+package lista9;
+
+import weka.core.Instance;
+import weka.core.Instances;
+import weka.core.converters.ConverterUtils.DataSource;
+
+public class App {
+
+	public static void main(String... args) {
+		try (DataSource dataSource = new DataSource("/home/mateusz/Studia/sem8/ZMiTAD/Listy zadań/lista_9_Weka/12168104L2_2.arff")){
+
+			Instances instances = dataSource.getDataSet();
+			for (Instance instance : instances) {
+				System.out.println(instance);
+			}
+		} catch (Exception e) {
+			System.out.println("Hello2");
+			e.printStackTrace();
+		}
+	}
+
+}

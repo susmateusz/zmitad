@@ -1,0 +1,8 @@
+1462657665699	Move file
+1462658632023	Extract method 'loadArffFile'
+1462660837194	Extract method 'isLoanRejected'
+1462660897624	Extract method 'loanGreaterThan900'
+1462660945239	Extract constant 'MAX_LOAN_VALUE'
+1462660991620	Rename method 'loanGreaterThan900'
+1462661078002	Extract method 'removeSomeRecords'
+1462661163152	Rename method 'removeSomeRecords'

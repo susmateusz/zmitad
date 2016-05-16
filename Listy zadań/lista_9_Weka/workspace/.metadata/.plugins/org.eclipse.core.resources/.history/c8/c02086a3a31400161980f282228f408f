@@ -1,0 +1,33 @@
+package lista9;
+
+import weka.core.Attribute;
+import weka.core.Instance;
+import weka.core.Instances;
+import weka.core.converters.ConverterUtils.DataSource;
+
+public class App {
+
+	public static void main(String... args) throws Exception {
+			Instances instances = loadArffFile();
+			for (Instance instance : instances) {
+				System.out.println(instance);
+			}
+			Attribute statusPozyczki = instances.attribute("status_pozyczki");
+			Attribute kwotaKredytu = instances.attribute("kwota_kredytu");
+			for (int i = instances.numInstances()-1;i>=0; i++) {
+				System.out.println(instances.instance(i));
+				System.out.println(instances.instance(i).value(kwotaKredytu));
+				if(instances.instance(i).stringValue(statusPozyczki).equals("odmowa")||instances.instance(i).value(kwotaKredytu)>900.0){
+					instances.delete(i);
+				}
+
+			}
+	}
+
+	private static Instances loadArffFile() throws Exception {
+		DataSource dataSource = new DataSource("/home/mateusz/Studia/sem8/ZMiTAD/Listy zadań/lista_9_Weka/12168104L2_2.arff");
+		Instances instances = dataSource.getDataSet();
+		return instances;
+	}
+
+}

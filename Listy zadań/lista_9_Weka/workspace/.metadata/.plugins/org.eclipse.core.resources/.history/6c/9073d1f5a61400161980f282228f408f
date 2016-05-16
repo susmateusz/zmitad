@@ -1,0 +1,22 @@
+package lista9;
+
+import org.junit.Before;
+import org.junit.Test;
+
+import weka.core.Instances;
+
+public class AppTest {
+
+	Instances instances;
+
+	@Before
+	public void setUp(){
+		Instances instances = App.loadArffFile();
+	}
+
+	@Test
+	public void testRemoveRecords(){
+
+	}
+
+}
