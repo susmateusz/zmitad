@@ -31,9 +31,18 @@ public class Zad2 {
         instances = discretize(instances);
         // <Atrybut, wartosciTegoAtrybutu,WartosciAtrybutuDecyzyjnego,liczniki>
         Map<String, Map<String, Map<String, Double>>> data = getCountersFromInstances(instances);
-        Map<String, Map<String,Double>> output = new HashMap<>();
+        Map<String, Map<String,Double>> output = getEntropies(data);
 
-        gainRatioAttributeEval(data);
+        gainRatioAttributeEval(output);
+        infoGainAttributeEval(output);
+        for(String key : output.keySet()){
+            System.out.println(key+" : "+ output.get(key).get("gainRatio"));
+        }
+        saveToArffFile(instances,outputFilename);
+    }
+
+    private static Map<String, Map<String, Double>> getEntropies(Map<String, Map<String, Map<String, Double>>> data) {
+        Map<String, Map<String, Double>> output = new HashMap<>();
         Map<String, Double> attributesEnthropies = getAttributesEnthropies(data);
         for(String key : attributesEnthropies.keySet()){
             Map<String,Double> enthropies = new HashMap<>();
@@ -48,34 +57,49 @@ public class Zad2 {
         for(String key : classAttributeEnthropies.keySet()){
             output.get(key).put("hClassAttribute", classAttributeEnthropies.get(key));
         }
+        return output;
+    }
 
-        for(String key : output.keySet()){
-            System.out.println(key+" : "+ output.get(key));
+    public static void gainRatioAttributeEval(Map<String, Map<String,Double>> entropies){
+        for(String attribute : entropies.keySet()){
+            double entropy = (entropies.get(attribute).get("hClass")-entropies.get(attribute).get("hClassAttribute"))/entropies.get(attribute).get("hAttribute");
+            entropies.get(attribute).put("gainRatio",entropy);
         }
-        saveToArffFile(instances,outputFilename);
+    }
+
+    public static void infoGainAttributeEval(Map<String, Map<String,Double>> entropies) {
+        for(String attribute : entropies.keySet()){
+            entropies.get(attribute).put("infoGain",entropies.get(attribute).get("hClass")-entropies.get(attribute).get("hClassAttribute"));
+        }
     }
 
     private static Map<String, Double> getClassAttributeEnthropies(Map<String, Map<String, Map<String, Double>>> data) {
         Map<String, Double> classAttributeEntrophies = new HashMap<>();
         // dla każdego atrybutu
         for(String key : data.keySet()){
-            Map<String, Double> tmp = new HashMap<>();
-            // sumowanie po ilosciach odpowiedzi {dobry, zły}
-            for(Map<String, Double> val : data.get(key).values()) {
-                for (String k : val.keySet()) {
-                    double oldValue = (tmp.get(k)!=null)?tmp.get(k):0;
-                    tmp.put(k, val.get(k)+oldValue);
-                }
+            // klucz: wartość atrybutu, wartość: In
+            List<Double> tmp = new ArrayList<>();
+            // dla każdego atrybutu liczymy In i jego wagę w H_ClassAttribute
+            for(String attrVal : data.get(key).keySet()){
+                double in = data
+                        .get(key)
+                        .get(attrVal)
+                        .values()
+                        .stream()
+                        .map(v->-v/instancesNum*log(v/instancesNum))
+                        .mapToDouble(Double::doubleValue)
+                        .sum();
+                double weight = data
+                        .get(key)
+                        .get(attrVal)
+                        .values()
+                        .stream()
+                        .map(v->v/instancesNum)
+                        .mapToDouble(Double::doubleValue)
+                        .sum();
+                double oldValue = (classAttributeEntrophies.get(key)!=null)?classAttributeEntrophies.get(key):0;
+                classAttributeEntrophies.put(key,oldValue+in*weight);
             }
-            // normalizacja - podział przez wszystkie próbki
-            for(Map<String, Double> val : data.get(key).values()) {
-                for (String k : val.keySet()) {
-                    double oldValue = (tmp.get(k)!=null)?tmp.get(k):0;
-                    tmp.put(k, oldValue/instancesNum);
-                }
-            }
-            double classAttribute = tmp.values().stream().map(v->-v*log(v)).mapToDouble(Double::doubleValue).sum();
-            classAttributeEntrophies.put(key,classAttribute);
         }
         return classAttributeEntrophies;
     }
@@ -160,15 +184,6 @@ public class Zad2 {
         Discretize filter = new Discretize();
         filter.setInputFormat(instances);
         return Filter.useFilter(instances,filter);
-    }
-
-    public static double gainRatioAttributeEval(Map<String, Map<String, Map<String, Double>>> instances){
-        //return infoGainAttributeEval(instances)/getAttributeEnthropy(instances);
-        return 0;
-    }
-
-    private static double infoGainAttributeEval(Map<String, Map<String, Map<String, Double>>> instances){
-        return 0;
     }
 
     private static double log(double num){
