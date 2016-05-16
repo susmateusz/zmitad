@@ -24,6 +24,7 @@ public class Zad2 {
     static String inputFilename = "/home/mateusz/Studia/sem8/ZMiTAD/Listy zadań/lista_10_Weka/12168104L3_1.arff";
     static String outputFilename = "/home/mateusz/Studia/sem8/ZMiTAD/Listy zadań/lista_10_Weka/12168104L4_2_tmp.arff";
     static double LOG_BASE = 2;
+    static int instancesNum = 0;
 
     public static void main(String... args) throws Exception {
         Instances instances = loadArffFile(inputFilename);
@@ -54,7 +55,7 @@ public class Zad2 {
         for(String key : data.keySet()){
             Map<String, Map<String, Double>> attrData = new HashMap<>(data.get(key));
             // pozbywanie się sumy - zostało {dobry, zły}
-            attrData.values().stream().forEach(map->map.remove(SUM));
+            //attrData.values().stream().forEach(map->map.remove(SUM));
 
             System.out.println(attrData.values());
             //System.out.println(attrData.values().stream().flatMap(map->map.values().stream()).collect(Collectors.toList()));
@@ -62,6 +63,23 @@ public class Zad2 {
             //classEntrophies.put(key,hAttribute);
         }
         return classEntrophies;
+    }
+
+    private static Map<String,Double> getAttributesEnthropies(Map<String, Map<String, Map<String, Double>>> data) {
+        Map<String, Double> attributesEntrophies = new HashMap<>();
+        for(String key : data.keySet()){
+            List<Double> sums = data.get(key)
+                    .values()
+                    .stream()
+                    .map(map->map.values()
+                            .stream()
+                            .mapToDouble(Double::doubleValue)
+                            .sum()/instancesNum)
+                    .collect(Collectors.toList());
+            double hAttribute = sums.stream().map(v->-v*log(v)).mapToDouble(Double::doubleValue).sum();
+            attributesEntrophies.put(key,hAttribute);
+        }
+        return attributesEntrophies;
     }
 
     private static Map<String, Map<String, Map<String, Double>>> getCountersFromInstances(Instances instances) {
@@ -89,11 +107,11 @@ public class Zad2 {
                 }
             }
             // changing counters to probabilities
-            double sum = classifiedValues.values().stream().mapToDouble(Double::valueOf).sum();
-            for(String key : classifiedValues.keySet()){
-                classifiedValues.put(key,classifiedValues.get(key)/sum);
-            }
-            classifiedValues.put("#SUM",sum/instances.numInstances());
+            //double sum = classifiedValues.values().stream().mapToDouble(Double::valueOf).sum();
+            //for(String key : classifiedValues.keySet()){
+            //    classifiedValues.put(key,classifiedValues.get(key)/sum);
+            //}
+            //classifiedValues.put("#SUM",sum/instances.numInstances());
             counters.put((String) value,classifiedValues);
         }
         return counters;
@@ -114,16 +132,6 @@ public class Zad2 {
         return 0;
     }
 
-    private static Map<String,Double> getAttributesEnthropies(Map<String, Map<String, Map<String, Double>>> data) {
-        Map<String, Double> attributesEntrophies = new HashMap<>();
-        for(String key : data.keySet()){
-            List<Double> list = data.get(key).values().stream().map(map->map.get(SUM)).collect(Collectors.toList());
-            double hAttribute = list.stream().map(v->-v*log(v)).mapToDouble(Double::doubleValue).sum();
-            attributesEntrophies.put(key,hAttribute);
-        }
-        return attributesEntrophies;
-    }
-
     private static double log(double num){
         return Math.log(num)/Math.log(LOG_BASE);
     }
@@ -133,6 +141,7 @@ public class Zad2 {
                 filename);
         Instances instances = dataSource.getDataSet();
         instances.setClassIndex(instances.numAttributes() - 1);
+        instancesNum = instances.numInstances();
         return instances;
     }
 
