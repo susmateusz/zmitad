@@ -42,25 +42,64 @@ public class Zad2 {
         }
         Map<String, Double> classEnthropies = getClassEnthropies(data);
         for(String key : classEnthropies.keySet()){
-            Map<String,Double> enthropies = new HashMap<>();
-            enthropies.put("hClass", classEnthropies.get(key));
-            output.put(key,enthropies);
+            output.get(key).put("hClass", classEnthropies.get(key));
         }
-        System.out.println(output);
+        Map<String, Double> classAttributeEnthropies = getClassAttributeEnthropies(data);
+        for(String key : classAttributeEnthropies.keySet()){
+            output.get(key).put("hClassAttribute", classAttributeEnthropies.get(key));
+        }
+
+        for(String key : output.keySet()){
+            System.out.println(key+" : "+ output.get(key));
+        }
         saveToArffFile(instances,outputFilename);
+    }
+
+    private static Map<String, Double> getClassAttributeEnthropies(Map<String, Map<String, Map<String, Double>>> data) {
+        Map<String, Double> classAttributeEntrophies = new HashMap<>();
+        // dla każdego atrybutu
+        for(String key : data.keySet()){
+            Map<String, Double> tmp = new HashMap<>();
+            // sumowanie po ilosciach odpowiedzi {dobry, zły}
+            for(Map<String, Double> val : data.get(key).values()) {
+                for (String k : val.keySet()) {
+                    double oldValue = (tmp.get(k)!=null)?tmp.get(k):0;
+                    tmp.put(k, val.get(k)+oldValue);
+                }
+            }
+            // normalizacja - podział przez wszystkie próbki
+            for(Map<String, Double> val : data.get(key).values()) {
+                for (String k : val.keySet()) {
+                    double oldValue = (tmp.get(k)!=null)?tmp.get(k):0;
+                    tmp.put(k, oldValue/instancesNum);
+                }
+            }
+            double classAttribute = tmp.values().stream().map(v->-v*log(v)).mapToDouble(Double::doubleValue).sum();
+            classAttributeEntrophies.put(key,classAttribute);
+        }
+        return classAttributeEntrophies;
     }
 
     private static Map<String,Double> getClassEnthropies(Map<String, Map<String, Map<String, Double>>> data) {
         Map<String, Double> classEntrophies = new HashMap<>();
         for(String key : data.keySet()){
-            Map<String, Map<String, Double>> attrData = new HashMap<>(data.get(key));
-            // pozbywanie się sumy - zostało {dobry, zły}
-            //attrData.values().stream().forEach(map->map.remove(SUM));
-
-            System.out.println(attrData.values());
-            //System.out.println(attrData.values().stream().flatMap(map->map.values().stream()).collect(Collectors.toList()));
-            //double classAttribute = attrData.values().stream().map(v->-v*log(v)).mapToDouble(Double::doubleValue).sum();
-            //classEntrophies.put(key,hAttribute);
+            Map<String, Double> tmp = new HashMap<>();
+            // sumowanie po ilosciach odpowiedzi {dobry, zły}
+            for(Map<String, Double> val : data.get(key).values()) {
+                for (String k : val.keySet()) {
+                    double oldValue = (tmp.get(k)!=null)?tmp.get(k):0;
+                    tmp.put(k, val.get(k)+oldValue);
+                }
+            }
+            // normalizacja - podział przez wszystkie próbki
+            for(Map<String, Double> val : data.get(key).values()) {
+                for (String k : val.keySet()) {
+                    double oldValue = (tmp.get(k)!=null)?tmp.get(k):0;
+                    tmp.put(k, oldValue/instancesNum);
+                }
+            }
+            double classAttribute = tmp.values().stream().map(v->-v*log(v)).mapToDouble(Double::doubleValue).sum();
+            classEntrophies.put(key,classAttribute);
         }
         return classEntrophies;
     }
