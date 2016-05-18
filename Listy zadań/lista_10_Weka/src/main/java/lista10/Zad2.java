@@ -3,33 +3,32 @@ package lista10;
 import weka.core.Attribute;
 import weka.core.Instance;
 import weka.core.Instances;
-import weka.core.converters.ArffSaver;
 import weka.core.converters.ConverterUtils.DataSource;
 import weka.filters.Filter;
 import weka.filters.supervised.attribute.Discretize;
 
-import java.io.File;
-import java.io.IOException;
 import java.util.*;
 import java.util.stream.Collectors;
 
 
 /**
  * Created by mateusz on 15.05.16.
+ * Lista 10. Zadanie 2.
  */
-public class Zad2 {
+class Zad2 {
 
-    static String inputFilename = "/home/mateusz/Studia/sem8/ZMiTAD/Listy zadań/lista_10_Weka/12168104L3_1.arff";
-    static String outputFilename = "/home/mateusz/Studia/sem8/ZMiTAD/Listy zadań/lista_10_Weka/test_out.arff";
+    static final String DEFAULT_INPUT_FILE = "/home/mateusz/Studia/sem8/ZMiTAD/Listy zadań/lista_10_Weka/12168104L3_1.arff";
+    static final double THRESHOLD = 0.001;
+
     static double LOG_BASE = 2;
-    static double THRESHOLD = 0.001;
     static int instancesNum = 0;
 
     public static void main(String... args) throws Exception {
-        Instances instances = loadArffFile(inputFilename);
+        Instances instances = loadArffFile(DEFAULT_INPUT_FILE);
         instances = discretize(instances);
         // <Atrybut, wartosciTegoAtrybutu,WartosciAtrybutuDecyzyjnego,liczniki>
         Map<String, Map<String, Map<String, Double>>> data = getCountersFromInstances(instances);
+        // <Atrybut, mapa z entropiami>
         Map<String, Map<String, Double>> output = getEntropies(data);
 
         gainRatioEval(output);
@@ -37,7 +36,22 @@ public class Zad2 {
         for (String key : output.keySet()) {
             System.out.println(key + " : " + output.get(key).get("gainRatio"));
         }
-        saveToArffFile(instances, outputFilename);
+    }
+
+    public static void gainRatioEval(Map<String, Map<String, Double>> entropies) {
+        infoGainEval(entropies);
+        for (String attribute : entropies.keySet()) {
+            double infoGain = entropies.get(attribute).get("infoGain");
+            double hAttribute = entropies.get(attribute).get("hAttribute");
+            double entropy = (Math.abs(hAttribute)<THRESHOLD)? 0.0 : infoGain / hAttribute;
+            entropies.get(attribute).put("gainRatio", entropy);
+        }
+    }
+
+    public static void infoGainEval(Map<String, Map<String, Double>> entropies) {
+        for (String attribute : entropies.keySet()) {
+            entropies.get(attribute).put("infoGain", entropies.get(attribute).get("hClass") - entropies.get(attribute).get("hClassAttribute"));
+        }
     }
 
     public static Map<String, Map<String, Double>> getEntropies(Map<String, Map<String, Map<String, Double>>> data) {
@@ -59,28 +73,10 @@ public class Zad2 {
         return output;
     }
 
-    public static void gainRatioEval(Map<String, Map<String, Double>> entropies) {
-        infoGainEval(entropies);
-        for (String attribute : entropies.keySet()) {
-            double infoGain = entropies.get(attribute).get("infoGain");
-            double hAttribute = entropies.get(attribute).get("hAttribute");
-            double entropy = (Math.abs(hAttribute)<THRESHOLD)? 0.0 : infoGain / hAttribute;
-            entropies.get(attribute).put("gainRatio", entropy);
-        }
-    }
-
-    public static void infoGainEval(Map<String, Map<String, Double>> entropies) {
-        for (String attribute : entropies.keySet()) {
-            entropies.get(attribute).put("infoGain", entropies.get(attribute).get("hClass") - entropies.get(attribute).get("hClassAttribute"));
-        }
-    }
-
     public static Map<String, Double> getClassAttributeEnthropies(Map<String, Map<String, Map<String, Double>>> data) {
         Map<String, Double> classAttributeEntrophies = new HashMap<>();
         // dla każdego atrybutu
         for (String key : data.keySet()) {
-            // klucz: wartość atrybutu, wartość: In
-            List<Double> tmp = new ArrayList<>();
             // dla każdego atrybutu liczymy In i jego wagę w H_ClassAttribute
             for (String attrVal : data.get(key).keySet()) {
                 double rowSum = data
@@ -160,7 +156,7 @@ public class Zad2 {
         return data;
     }
 
-    public static Map<String, Map<String, Double>> getAttributeValuesCounters(Instances instances, Attribute attribute) {
+    private static Map<String, Map<String, Double>> getAttributeValuesCounters(Instances instances, Attribute attribute) {
         Map<String, Map<String, Double>> counters = new HashMap<>();
         Attribute classIndex = instances.attribute(instances.numAttributes() - 1);
         for (Object value : Collections.list(attribute.enumerateValues())) {
@@ -204,13 +200,6 @@ public class Zad2 {
         instances.setClassIndex(instances.numAttributes() - 1);
         instancesNum = instances.numInstances();
         return instances;
-    }
-
-    public static void saveToArffFile(Instances instances, String filename) throws IOException {
-        ArffSaver arffSaver = new ArffSaver();
-        arffSaver.setInstances(instances);
-        arffSaver.setFile(new File(filename));
-        arffSaver.writeBatch();
     }
 
 }

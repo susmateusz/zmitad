@@ -14,6 +14,7 @@ import static org.junit.Assert.assertNotNull;
 
 /**
  * Created by mateusz on 18.05.16.
+ * Testy dla prawdziwego pliku z danymi.
  */
 public class Zad2_12168104L3_1Test {
 
@@ -23,7 +24,7 @@ public class Zad2_12168104L3_1Test {
 
     @Before
     public void setUp() throws Exception {
-        instances = Zad2.discretize(Zad2.loadArffFile(Zad2.inputFilename));
+        instances = Zad2.discretize(Zad2.loadArffFile(Zad2.DEFAULT_INPUT_FILE));
         data = Zad2.getCountersFromInstances(instances);
         wekaOutput = new HashMap<>();
         wekaOutput.put("miesieczny_dochod_netto", 0.12656);

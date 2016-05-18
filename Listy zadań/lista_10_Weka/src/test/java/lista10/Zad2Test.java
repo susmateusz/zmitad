@@ -14,15 +14,16 @@ import static org.junit.Assert.assertNotNull;
 
 /**
  * Created by mateusz on 18.05.16.
+ * Testy dla uproszczonych danych, na potrzeby debuggowania.
  */
 public class Zad2Test {
 
     private Instances instances;
     private Map<String, Map<String, Map<String, Double>>> data;
-    private String inputFilename = "/home/mateusz/Studia/sem8/ZMiTAD/Listy zadań/lista_10_Weka/test.arff";
 
     @Before
     public void setUp() throws Exception {
+        String inputFilename = "/home/mateusz/Studia/sem8/ZMiTAD/Listy zadań/lista_10_Weka/test.arff";
         instances = Zad2.discretize(Zad2.loadArffFile(inputFilename));
         data = Zad2.getCountersFromInstances(instances);
     }
@@ -47,7 +48,7 @@ public class Zad2Test {
         // when
         Map<String, Double> attributesEntropies = Zad2.getAttributesEnthropies(data);
         // then
-        assertThat(attributesEntropies.get("wiek").doubleValue(), closeTo(expected, epsilon));
+        assertThat(attributesEntropies.get("wiek"), closeTo(expected, epsilon));
     }
 
     @Test
@@ -58,7 +59,7 @@ public class Zad2Test {
         // when
         Map<String, Double> classEntropies = Zad2.getClassEnthropies(data);
         // then
-        assertThat(classEntropies.get("wiek").doubleValue(), closeTo(expected, epsilon));
+        assertThat(classEntropies.get("wiek"), closeTo(expected, epsilon));
     }
 
     @Test
@@ -72,7 +73,7 @@ public class Zad2Test {
         // when
         Map<String, Double> classAttributeEntropies = Zad2.getClassAttributeEnthropies(data);
         // then
-        assertThat(classAttributeEntropies.get("wiek").doubleValue(), closeTo(E, epsilon));
+        assertThat(classAttributeEntropies.get("wiek"), closeTo(E, epsilon));
     }
 
     @Test
