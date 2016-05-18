@@ -2,7 +2,6 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="1824f1e8-ccb0-4a42-bb60-f06855075201" name="Default" comment="">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/test.arff" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
     </list>
     <ignored path="lista_10_Weka.iws" />
@@ -693,7 +692,14 @@
       <option name="project" value="LOCAL" />
       <updated>1463604663279</updated>
     </task>
-    <option name="localTasksCounter" value="2" />
+    <task id="LOCAL-00002" summary="Added test.arff file.">
+      <created>1463607319205</created>
+      <option name="number" value="00002" />
+      <option name="presentableId" value="LOCAL-00002" />
+      <option name="project" value="LOCAL" />
+      <updated>1463607319205</updated>
+    </task>
+    <option name="localTasksCounter" value="3" />
     <servers />
   </component>
   <component name="TestHistory">
@@ -771,7 +777,8 @@
     <option name="CHECK_COMMIT_MESSAGE_SPELLING" value="false" />
     <MESSAGE value="Added tests. hAttribute is correct." />
     <MESSAGE value="Added more tests. Finally found the bug... Refactored." />
-    <option name="LAST_COMMIT_MESSAGE" value="Added more tests. Finally found the bug... Refactored." />
+    <MESSAGE value="Added test.arff file." />
+    <option name="LAST_COMMIT_MESSAGE" value="Added test.arff file." />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
