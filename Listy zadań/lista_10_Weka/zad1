@@ -1,0 +1,29 @@
+Gain Ratio feature evaluator
+
+Ranked attributes:
+ 0.12656   5 miesieczny_dochod_netto
+ 0.05201   7 okres_w_jakim_pobierał_dochód
+ 0.04111   6 ktore_rolowanie
+ 0.01521   8 okres_w_jakim_będzie_pobierał_dochód
+ 0.00931   2 wiek
+ 0.00826   3 płeć
+
+Selected attributes: 5,7,6,8,2,3 : 6
+
+Information Gain Ranking Filter
+
+Ranked attributes:
+ 0.03754   6 ktore_rolowanie
+ 0.02118   7 okres_w_jakim_pobierał_dochód
+ 0.02025   2 wiek
+ 0.01825   5 miesieczny_dochod_netto
+ 0.00837   8 okres_w_jakim_będzie_pobierał_dochód
+ 0.00802   3 płeć
+
+Selected attributes: 6,7,2,5,8,3 : 6
+
+##########################################################
+
+
+
+
