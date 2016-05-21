@@ -71,18 +71,6 @@ public class CrossValidator {
             clsCopy.buildClassifier(train);
             eval.evaluateModel(clsCopy, test);
         }
-
-        // output evaluation
-        /*System.out.println();
-        System.out.println(eval.toSummaryString("=== " + numFolds+ "-fold Cross-validation run " + DEFAULT_SEED + "===", false));
-        System.out.println(Arrays.deepToString(eval.confusionMatrix()));
-
-        Evaluation eval2 = new Evaluation(randomized);
-        eval2.crossValidateModel(AbstractClassifier.makeCopy(classifier),randomized,numFolds,new Random(DEFAULT_SEED));
-        System.out.println();
-        System.out.println(eval2.toSummaryString("=== " + numFolds+ "-fold Cross-validation run " + DEFAULT_SEED + "===", false));
-        System.out.println(Arrays.deepToString(eval2.confusionMatrix()));
-        */
         return new Matrix(eval.confusionMatrix());
     }
 
