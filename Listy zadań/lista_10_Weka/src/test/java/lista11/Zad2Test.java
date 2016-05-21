@@ -15,10 +15,11 @@ import java.util.*;
 
 /**
  * Created by mateusz on 21.05.16.
+ * Zad2Test.
  */
 public class Zad2Test {
-    public static final int NUM_TESTS = 1;
-    public static final int SEED = 10;
+    private static final int NUM_TESTS = 1;
+    private static final int SEED = 10;
 
     private CrossValidator crossValidator;
     private int[] availableFolds;

@@ -4,28 +4,23 @@ import weka.classifiers.AbstractClassifier;
 import weka.classifiers.Classifier;
 import weka.classifiers.Evaluation;
 import weka.core.Instances;
-import weka.core.Utils;
 import weka.core.converters.ConverterUtils;
 import weka.core.matrix.Matrix;
 import weka.filters.Filter;
 import weka.filters.supervised.attribute.Discretize;
 
-import java.util.Arrays;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Random;
 
 /**
  * Created by mateusz on 21.05.16.
+ * CrossValidator.
  */
-public class CrossValidator {
+class CrossValidator {
 
     private Instances instances;
-    public static int DEFAULT_SEED = 3;
-
-    private CrossValidator() {
-
-    }
+    private static final int DEFAULT_SEED = 3;
 
     public CrossValidator(String filename) {
         try {
@@ -36,13 +31,13 @@ public class CrossValidator {
         }
     }
 
-    public void discretize() throws Exception {
+    private void discretize() throws Exception {
         Discretize filter = new Discretize();
         filter.setInputFormat(instances);
         instances = Filter.useFilter(instances, filter);
     }
 
-    public Instances loadArffFile(String filename) throws Exception {
+    private Instances loadArffFile(String filename) throws Exception {
         ConverterUtils.DataSource dataSource = new ConverterUtils.DataSource(
                 filename);
         Instances instances = dataSource.getDataSet();
@@ -88,7 +83,7 @@ public class CrossValidator {
         return averageMatrix(totalConfusionMatrix,numTests);
     }
 
-    public Matrix averageMatrix(Matrix matrix, int tests) {
+    private Matrix averageMatrix(Matrix matrix, int tests) {
         return matrix.timesEquals(1.0/tests);
     }
     public Map<String,Double> getStatistics(Matrix matrix){

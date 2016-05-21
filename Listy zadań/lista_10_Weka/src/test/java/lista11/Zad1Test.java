@@ -17,6 +17,7 @@ import static org.junit.Assert.assertTrue;
 
 /**
  * Created by mateusz on 21.05.16.
+ * Zad1Test.
  */
 public class Zad1Test {
 
@@ -104,9 +105,9 @@ public class Zad1Test {
         Matrix result = crossValidator.runCrossValidation(classifier, numFolds, numTests, seed);
         double[][] resultArray = result.getArray();
         Double sum = 0.0;
-        for (int i = 0; i < resultArray.length; i++) {
-            for (int j = 0; j < resultArray[i].length; j++) {
-                sum += resultArray[i][j];
+        for (double[] row : resultArray) {
+            for (double cell : row) {
+                sum += cell;
             }
         }
         // then
