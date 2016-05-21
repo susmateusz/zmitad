@@ -1,0 +1,23 @@
+@relation 'test'
+
+@attribute wiek {'\'(-inf-30.0]\'','\'(30.0-40.0]\'','\'(40.0-inf)\''}
+@attribute a {pierwszy,drugi}
+@attribute status_pozyczki {tak,nie}
+
+@data
+'\'(-inf-30.0]\'',pierwszy,tak
+'\'(-inf-30.0]\'',pierwszy,nie
+'\'(-inf-30.0]\'',pierwszy,tak
+'\'(-inf-30.0]\'',pierwszy,nie
+'\'(-inf-30.0]\'',drugi,nie
+'\'(30.0-40.0]\'',drugi,tak
+'\'(30.0-40.0]\'',drugi,tak
+'\'(30.0-40.0]\'',drugi,tak
+'\'(30.0-40.0]\'',drugi,tak
+'\'(40.0-inf)\'',drugi,tak
+'\'(40.0-inf)\'',drugi,nie
+'\'(40.0-inf)\'',drugi,tak
+'\'(40.0-inf)\'',drugi,nie
+'\'(40.0-inf)\'',pierwszy,tak
+'\'(-inf-30.0]\'',drugi,nie
+'\'(40.0-inf)\'',pierwszy,nie
