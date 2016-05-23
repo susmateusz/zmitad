@@ -1,0 +1,32 @@
+Classifier: JRIP: No model built yet.
+Folds:3	GMean = 0,33364	AUC = 0,07236
+Folds:23	GMean = 0,39002	AUC = 0,08949
+Folds:29	GMean = 0,38610	AUC = 0,08935
+
+Classifier:J48:  No classifier built
+Folds:3	GMean = 0,35015	AUC = 0,07507
+Folds:23	GMean = 0,29278	AUC = 0,05350
+Folds:29	GMean = 0,28907	AUC = 0,04908
+
+Classifier: SMO: No model built yet.
+Folds:3	GMean = 0,27549	AUC = 0,04223
+Folds:23	GMean = 0,27549	AUC = 0,04223
+Folds:29	GMean = 0,27549	AUC = 0,04223
+
+Classifier: Naive Bayes Classifier: No model built yet.
+Folds:3	GMean = 0,47225	AUC = 0,14974
+Folds:23	GMean = 0,49155	AUC = 0,16434
+Folds:29	GMean = 0,49155	AUC = 0,16434
+
+Classifier: ZeroR: No model built yet.
+Folds:3	GMean = 0,00000	AUC = 0,00000
+Folds:23	GMean = 0,00000	AUC = 0,00000
+Folds:29	GMean = 0,00000	AUC = 0,00000
+
+Classifier: MultilayerPerceptron. 
+Folds:3	GMean = 0,37795	AUC = 0,08967
+Folds:23	GMean = 0,46861	AUC = 0,15021
+Folds:29	GMean = 0,35992	AUC = 0,08315
+
+Process finished with exit code 0
+
