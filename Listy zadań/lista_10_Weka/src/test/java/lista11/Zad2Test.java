@@ -47,7 +47,6 @@ public class Zad2Test {
                 double GMean = stats.get("GMean");
                 double AUC = stats.get("AUC");
                 System.out.println("Folds:" + numFolds + "\tGMean = " + String.format("%.5f", GMean) + "\tAUC = " + String.format("%.5f", AUC));
-                //System.out.println(Arrays.deepToString(matrix.getArray()));
             }
         }
 
