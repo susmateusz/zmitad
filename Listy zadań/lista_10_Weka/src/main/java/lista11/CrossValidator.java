@@ -17,7 +17,7 @@ import java.util.Random;
  * Created by mateusz on 21.05.16.
  * CrossValidator.
  */
-class CrossValidator {
+public class CrossValidator {
 
     private Instances instances;
     private static final int DEFAULT_SEED = 3;
@@ -56,10 +56,14 @@ class CrossValidator {
     }
 
     public Matrix runCrossValidation(Classifier classifier, int numFolds, int numTests, int seed) throws Exception, FoldsCannotBeEqualException {
-        Matrix totalConfusionMatrix = new Matrix(2, 2);
+        Matrix totalConfusionMatrix = null;
         for (int n = 0; n < numTests; n++) {
             Matrix evaluatedConfusionMatrix = evaluate(randomize(seed + n), classifier, numFolds);
-            //System.out.println("Test no. "+n+": "+Arrays.deepToString(evaluatedConfusionMatrix.getArray()));
+            if(totalConfusionMatrix==null){
+                int columns = evaluatedConfusionMatrix.getColumnDimension();
+                int rows = evaluatedConfusionMatrix.getRowDimension();
+                totalConfusionMatrix = new Matrix(columns,rows);
+            }
             totalConfusionMatrix.plusEquals(evaluatedConfusionMatrix);
         }
         return averageMatrix(totalConfusionMatrix, numTests);
@@ -75,7 +79,7 @@ class CrossValidator {
             Classifier clsCopy = AbstractClassifier.makeCopy(classifier);
             clsCopy.buildClassifier(train);
             eval.evaluateModel(clsCopy, test);
-            System.out.println(clsCopy);
+            //System.out.println(clsCopy);
         }
         return new Matrix(eval.confusionMatrix());
     }

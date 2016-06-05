@@ -30,7 +30,7 @@ public class Zad2Test {
         // dividers: 1, 3, 23, 29, 69, 87, 667, 2001
         String inputFilename = "/home/mateusz/Studia/sem8/ZMiTAD/Listy zadań/lista_10_Weka/12168104L3_1.arff";
         crossValidator = new CrossValidator(inputFilename);
-        availableFolds = new int[]{3, 23, 29,};
+        availableFolds = new int[]{3, 5, 7};
         availableClassifiers = new Classifier[]{
                 new JRip(), new J48(), new SMO(), new NaiveBayes(), new ZeroR(), new MultilayerPerceptron()
         };

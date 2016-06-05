@@ -1,0 +1,64 @@
+=== Attribute Selection on all input data ===
+
+Search Method:
+	Attribute ranking.
+
+Attribute Evaluator (supervised, Class (nominal): 11 Out1):
+	Gain Ratio feature evaluator
+
+Ranked attributes:
+ 0.1169   3 In3
+ 0.0785  10 In10
+ 0.055    5 In5
+ 0.0495   9 In9
+ 0.0458   2 In2
+ 0.0378   7 In7
+ 0.0319   8 In8
+ 0.0298   6 In6
+ 0.0257   1 In1
+ 0.0134   4 In4
+
+Selected attributes: 3,10,5,9,2,7,8,6,1,4 : 10
+
+=== Attribute Selection on all input data ===
+
+Search Method:
+	Attribute ranking.
+
+Attribute Evaluator (supervised, Class (nominal): 11 Out1):
+	Information Gain Ranking Filter
+
+Ranked attributes:
+ 0.2274   3 In3
+ 0.1231  10 In10
+ 0.1077   5 In5
+ 0.078    9 In9
+ 0.0707   2 In2
+ 0.0582   7 In7
+ 0.0491   8 In8
+ 0.0399   1 In1
+ 0.0297   6 In6
+ 0.0212   4 In4
+
+Selected attributes: 3,10,5,9,2,7,8,1,6,4 : 10
+
+********************************************************************************
+Reguły asocjacyjne:
+min_support = 0.1
+min_confidence = 0.7
+
+Rules:
+  1. In1='(1.666667-2.333333]' In3='(-inf-1.75]' 129 ==> In6='(-inf-1.5]' 111    <conf:(0.86)> lift:(1.58) lev:(0.04) [40] conv:(3.09)
+  2. In3='(-inf-1.75]' In7='(-inf-1.666667]' 143 ==> In6='(-inf-1.5]' 118    <conf:(0.83)> lift:(1.51) lev:(0.04) [40] conv:(2.5)
+  3. In2='(1.666667-2.333333]' In7='(-inf-1.666667]' 144 ==> In6='(-inf-1.5]' 117    <conf:(0.81)> lift:(1.49) lev:(0.04) [38] conv:(2.34)
+  4. In2='(2.333333-inf)' In4='(-inf-1.666667]' 148 ==> In6='(1.5-inf)' 119    <conf:(0.8)> lift:(1.77) lev:(0.05) [51] conv:(2.69)
+  5. In3='(-inf-1.75]' Out1='(2.75-3.5]' 195 ==> In6='(-inf-1.5]' 154    <conf:(0.79)> lift:(1.45) lev:(0.05) [47] conv:(2.11)
+  6. In3='(-inf-1.75]' 306 ==> In6='(-inf-1.5]' 234    <conf:(0.76)> lift:(1.4) lev:(0.07) [67] conv:(1.91)
+  7. In1='(1.666667-2.333333]' In4='(1.666667-2.333333]' 181 ==> In8='(1.666667-2.333333]' 134    <conf:(0.74)> lift:(1.63) lev:(0.05) [51] conv:(2.06)
+  8. In1='(1.666667-2.333333]' Out1='(2.75-3.5]' 157 ==> In6='(-inf-1.5]' 115    <conf:(0.73)> lift:(1.34) lev:(0.03) [29] conv:(1.66)
+  9. Out1='(4.25-inf)' 217 ==> In10='(2.333333-inf)' 158    <conf:(0.73)> lift:(1.84) lev:(0.07) [72] conv:(2.18)
+ 10. In2='(2.333333-inf)' In4='(1.666667-2.333333]' 154 ==> In6='(-inf-1.5]' 112    <conf:(0.73)> lift:(1.33) lev:(0.03) [28] conv:(1.63)
+ 11. In5='(3.25-inf)' 171 ==> In2='(2.333333-inf)' 123    <conf:(0.72)> lift:(1.73) lev:(0.05) [51] conv:(2.04)
+ 12. In8='(1.666667-2.333333]' In10='(1.666667-2.333333]' 151 ==> In6='(-inf-1.5]' 108    <conf:(0.72)> lift:(1.31) lev:(0.03) [25] conv:(1.56)
+ 13. In1='(1.666667-2.333333]' In4='(1.666667-2.333333]' 181 ==> In6='(-inf-1.5]' 129    <conf:(0.71)> lift:(1.31) lev:(0.03) [30] conv:(1.55)
+ 14. In4='(1.666667-2.333333]' In10='(-inf-1.666667]' 149 ==> In6='(-inf-1.5]' 105    <conf:(0.7)> lift:(1.29) lev:(0.02) [23] conv:(1.51)
